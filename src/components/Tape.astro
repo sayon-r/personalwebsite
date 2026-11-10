@@ -1,0 +1,43 @@
+---
+// The "shift register": three bits wide, running down the left margin.
+// Pastel bits clock slowly downward. Hidden on narrow screens.
+const colors = ['var(--lav)', 'var(--mint)', 'var(--peach)'];
+const bits: { on: boolean; color: string; delay: string }[] = [];
+for (let r = 0; r < 150; r++) {
+  for (let c = 0; c < 3; c++) {
+    let v = Math.sin((r + 1) * 12.9898 + (c + 1) * 78.233) * 43758.5453;
+    v -= Math.floor(v);
+    bits.push({ on: v < 0.34, color: colors[c], delay: (r * 0.09 - 9).toFixed(2) + 's' });
+  }
+}
+---
+<div class="tape" aria-hidden="true">
+  {bits.map((b) => (
+    <span class:list={['bit', { on: b.on }]} style={`--c:${b.color};animation-delay:${b.delay}`}></span>
+  ))}
+</div>
+
+<style>
+  .tape {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 8px);
+    grid-auto-rows: 8px;
+    gap: 4px;
+    align-content: start;
+    pointer-events: none;
+  }
+  .bit { width: 8px; height: 8px; border-radius: 2px; background: rgba(236, 236, 244, 0.07); }
+  .on { animation: shift 9s linear infinite; }
+  @keyframes shift {
+    0%, 100% { background: rgba(236, 236, 244, 0.07); }
+    3%, 13% { background: var(--c); }
+    19% { background: rgba(236, 236, 244, 0.07); }
+  }
+  @media (max-width: 760px) { .tape { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .on { background: var(--c); } }
+</style>

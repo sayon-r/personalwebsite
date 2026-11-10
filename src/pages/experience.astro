@@ -2,23 +2,26 @@
 import Base from '../layouts/Base.astro';
 import { experience } from '../data/site';
 ---
-<Base title="Experience">
+<Base page="experience" title="Experience">
   <section class="intro">
-    <h1>Experience</h1>
-    <p class="lede">
-      Engineering work across <span class="accent">ML systems</span>,
-      <span class="accent">SoC infrastructure</span>, and
-      <span class="accent">recommendation systems</span>.
+    <h1>experience</h1>
+    <p>
+      engineering work across <span class="hl butter">ml systems</span>,
+      <span class="hl mint">soc infrastructure</span>, and
+      <span class="hl sky">recommendation systems</span>.
     </p>
   </section>
 
   <section class="list">
     {experience.map((job) => (
       <article>
-        <div class="when">{job.period}</div>
-        <div class="what">
-          <h2>{job.company}</h2>
-          <div class="role">{[job.role, job.team, job.location].filter(Boolean).join(' · ')}</div>
+        <span class="chip" style={`background:var(--${job.color})`}></span>
+        <div class="body">
+          <div class="top">
+            <h2>{job.company}</h2>
+            <span class="mono when">{job.period}</span>
+          </div>
+          <div class="role">{job.role}, {job.team} · {job.location}</div>
           <p>{job.summary}</p>
         </div>
       </article>
@@ -27,23 +30,12 @@ import { experience } from '../data/site';
 </Base>
 
 <style>
-  .list { margin-top: 96px; border-top: 1px solid var(--line-strong); }
-  article {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 48px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .when {
-    flex: 0 0 180px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-4);
-    padding-top: 7px;
-  }
-  .what { flex: 1 1 360px; min-width: 0; }
-  h2 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
-  .role { margin-top: 4px; font-size: 16px; color: var(--text-3); }
-  p { margin: 14px 0 0; font-size: 16px; line-height: 1.6; color: var(--text-3); }
+  article { display: flex; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+  .chip { margin-top: 8px; }
+  .body { flex: 1; min-width: 0; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+  h2 { margin: 0; font-size: 20px; font-weight: 500; }
+  .when { font-size: 12px; color: var(--muted); }
+  .role { margin-top: 4px; font-size: 16px; color: var(--muted); }
+  p { margin: 12px 0 0; font-size: 16px; line-height: 1.65; color: var(--text-2); }
 </style>

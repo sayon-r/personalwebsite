@@ -2,49 +2,40 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
+const colors = ['pink', 'lav', 'mint', 'butter', 'sky', 'peach'];
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const minutes = (body = '') => Math.max(1, Math.round(body.split(/\s+/).length / 230));
-const fmt = (d: Date) =>
-  `${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+const fmt = (d: Date) => `${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
 ---
-<Base title="Blog" description="Musings from work and personal research.">
+<Base page="blog" title="Blog" description="Musings from work and personal research.">
   <section class="intro">
-    <h1>Blog</h1>
-    <p class="sub">Musings from work and personal research.</p>
+    <h1>blog</h1>
+    <p>musings from <span class="hl pink">work</span> and <span class="hl lav">personal research</span>.</p>
   </section>
 
-  <section class="posts">
-    {posts.length === 0 && <p class="empty">First post coming soon.</p>}
-    {posts.map((post) => (
+  <section class="list">
+    {posts.length === 0 && <p class="empty">first post coming soon.</p>}
+    {posts.map((post, i) => (
       <a href={`/blog/${post.id}`}>
-        <div class="date">{fmt(post.data.date)}</div>
-        <div class="body">
-          <h2>{post.data.title}</h2>
-          <p>{post.data.summary}</p>
-        </div>
-        <div class="read">{minutes(post.body)} min</div>
+        <span class="chip" style={`background:var(--${colors[i % colors.length]})`}></span>
+        <span class="body">
+          <span class="title">{post.data.title}</span>
+          <span class="summary">{post.data.summary}</span>
+        </span>
+        <span class="mono date">{fmt(post.data.date)}</span>
       </a>
     ))}
   </section>
 </Base>
 
 <style>
-  .posts { margin-top: 88px; border-top: 1px solid var(--line-strong); }
-  a {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 40px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .date, .read { font-family: var(--mono); font-size: 12px; color: var(--text-4); padding-top: 8px; }
-  .date { flex: 0 0 120px; }
-  .read { flex: 0 0 auto; }
-  .body { flex: 1 1 420px; min-width: 0; }
-  h2 { margin: 0; font-size: 26px; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
-  a:hover h2 { color: var(--accent); }
-  p { margin: 10px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-3); }
-  .empty { padding: 32px 0; font-size: 16px; color: var(--text-4); }
+  a { display: flex; gap: 18px; padding: 24px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  a:hover .title { text-decoration: underline; text-decoration-color: var(--lav); }
+  .chip { margin-top: 7px; }
+  .body { flex: 1; min-width: 0; }
+  .title { display: block; font-size: 19px; font-weight: 500; line-height: 1.35; }
+  .summary { display: block; margin-top: 6px; font-size: 16px; color: var(--muted); }
+  .date { flex: 0 0 auto; font-size: 12px; color: var(--muted); padding-top: 5px; }
+  .empty { padding: 24px 0; font-size: 16px; color: var(--muted); margin: 0; }
 </style>

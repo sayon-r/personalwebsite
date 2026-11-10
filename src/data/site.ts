@@ -1,30 +1,38 @@
 // ---------------------------------------------------------------
 // All site content lives here (blog posts live in src/content/blog).
 // Anything in [BRACKETS] is a placeholder to replace.
+// Colors are one of: lav, mint, peach, butter, sky, pink.
 // ---------------------------------------------------------------
+
+export type Pastel = 'lav' | 'mint' | 'peach' | 'butter' | 'sky' | 'pink';
 
 export const site = {
   name: 'Sayon Ramanan',
-  title: 'Sayon Ramanan',
   description:
     'Building high performance systems at the intersection of hardware and software.',
 };
 
 export const links = [
-  { label: 'GitHub', href: 'https://github.com/sayon-r' },
-  { label: 'LinkedIn', href: '#' }, // [LINKEDIN URL]
-  { label: 'Email', href: 'mailto:[EMAIL]' },
-  { label: 'Résumé', href: '/resume.pdf' }, // drop resume.pdf into /public
+  { label: 'github', href: 'https://github.com/sayon-r' },
+  { label: 'linkedin', href: '#' }, // [LINKEDIN URL]
+  { label: 'email', href: 'mailto:[EMAIL]' },
+  { label: 'résumé', href: '/resume.pdf' }, // drop resume.pdf into /public
 ];
 
-export const nav = [
-  { label: 'home', href: '/' },
-  { label: 'experience', href: '/experience' },
-  { label: 'projects', href: '/projects' },
-  { label: 'blog', href: '/blog' },
-];
+// `color` tints the binary page counter beside the name in the header.
+export const pages = [
+  { key: 'home', label: 'home', href: '/', color: 'lav' },
+  { key: 'experience', label: 'experience', href: '/experience', color: 'butter' },
+  { key: 'projects', label: 'projects', href: '/projects', color: 'mint' },
+  { key: 'blog', label: 'blog', href: '/blog', color: 'pink' },
+] as const;
 
-export const experience = [
+export type PageKey = (typeof pages)[number]['key'];
+
+export const experience: {
+  company: string; role: string; team: string; location: string;
+  period: string; summary: string; color: Pastel;
+}[] = [
   {
     company: 'onsemi',
     role: 'Software Engineer Intern',
@@ -33,6 +41,7 @@ export const experience = [
     period: 'Sep — Dec 2026',
     summary:
       'Agent-driven firmware SDKs, multi-accelerator model deployment, compiler quantization validation, and automated build and test infrastructure across SoC platforms.',
+    color: 'butter',
   },
   {
     company: 'Portable Intelligence',
@@ -42,52 +51,42 @@ export const experience = [
     period: 'Jan — Apr 2026',
     summary:
       'Reinforcement learning recommendation policies and evaluation tooling for warehouse slot assignment.',
+    color: 'sky',
   },
 ];
 
-// Featured projects render as cards with a figure.
-// `figure` picks one of the diagrams in src/components/figures.
+// `figure` picks a glyph from src/components/figures.
 export const projects = [
   {
-    id: 'P/01',
-    tag: 'Raspberry Pi 5',
     name: 'On-device speculative decoding',
+    tag: 'Raspberry Pi 5',
     summary:
-      'A small draft model guesses ahead and a larger model checks its work in one pass, so a credit-card computer generates text faster.',
-    todo: '[ADD SPEEDUP + MODELS.]',
+      'A small draft model guesses ahead and a larger model checks its work in one pass, so a credit-card computer generates text faster. [Add speedup + models.]',
     stack: 'arm neon · int8 · c++',
     href: '#',
     figure: 'specdecode',
   },
   {
-    id: 'P/02',
-    tag: 'Kernel',
     name: 'Flash Attention, from scratch',
+    tag: 'Kernel',
     summary:
-      'The forward pass rebuilt tile by tile, with an online softmax so the full attention matrix never exists, wired into a custom autograd function.',
-    todo: '[ADD MEMORY / SPEED VS NAIVE.]',
+      'The forward pass rebuilt tile by tile, with an online softmax so the full attention matrix never exists, wired into a custom autograd function. [Add memory / speed vs naive.]',
     stack: 'pytorch · autograd · tiling',
     href: '#',
     figure: 'flashattn',
   },
 ] as const;
 
-// Smaller projects render as compact rows under the cards.
-export const smallProjects = [
-  { id: 'P/03', name: '[Smaller project]', summary: '[one line on what it is]', href: '#' },
-  { id: 'P/04', name: '[Smaller project]', summary: '[one line on what it is]', href: '#' },
-];
-
 export const listening = {
   track: '[Track title]',
   artist: '[Artist]',
-  // Put cover images in /public/covers and reference them as '/covers/name.jpg'.
-  // While a cover is null, a neutral gradient tile is shown.
+  // Put covers in /public/covers and reference them as '/covers/name.jpg'.
+  // While a cover is null, a pastel tile is shown.
   cover: null as string | null,
   shelf: [
-    { title: '[Album · Artist]', cover: null as string | null, tint: ['#6b4b3a', '#22160f'] },
-    { title: '[Album · Artist]', cover: null as string | null, tint: ['#c9c3b5', '#5c574d'] },
-    { title: '[Album · Artist]', cover: null as string | null, tint: ['#2f4a45', '#0f1a18'] },
-    { title: '[Album · Artist]', cover: null as string | null, tint: ['#552a2a', '#1a0c0c'] },
+    { title: '[Album · Artist]', cover: null as string | null, color: 'mint' as Pastel },
+    { title: '[Album · Artist]', cover: null as string | null, color: 'peach' as Pastel },
+    { title: '[Album · Artist]', cover: null as string | null, color: 'butter' as Pastel },
+    { title: '[Album · Artist]', cover: null as string | null, color: 'pink' as Pastel },
   ],
 };

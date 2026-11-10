@@ -1,23 +1,24 @@
 /* ---------------------------------------------------------------
-   Design tokens. Change the look of the whole site from here.
+   Design tokens — change the whole site's look from here.
    --------------------------------------------------------------- */
 :root {
-  --accent: #ff6a3d;          /* signal orange */
-  --bg: #0e0e0c;              /* warm off-black */
-  --bg-deep: #0b0b0a;
-  --text: #f2efe8;            /* headings, primary text */
-  --text-2: #d6d3cb;          /* links */
-  --text-3: #a8a59d;          /* body copy */
-  --text-4: #8f8c84;          /* labels, dates */
-  --line: rgba(233, 230, 223, 0.12);
-  --line-strong: rgba(233, 230, 223, 0.2);
-  --line-soft: rgba(233, 230, 223, 0.1);
+  --bg: #11121b;               /* night */
+  --text: #ececf4;
+  --text-2: #c6c8d8;           /* body copy */
+  --muted: #9a9db3;            /* labels, dates */
+  --line: rgba(236, 236, 244, 0.13);
 
-  --font: 'Geist', system-ui, sans-serif;
-  --mono: 'Geist Mono', ui-monospace, monospace;
+  /* pastels: solid (markers, bits) and text-on-tint (highlights) */
+  --lav: #b5a6ee;    --lav-t: #cdc2f7;    --lav-rgb: 181, 166, 238;
+  --mint: #86d6ad;   --mint-t: #a5e3c2;   --mint-rgb: 134, 214, 173;
+  --peach: #ffb08a;  --peach-t: #ffc3a6;  --peach-rgb: 255, 176, 138;
+  --butter: #f3d877; --butter-t: #f5e08e; --butter-rgb: 243, 216, 119;
+  --sky: #9cc4f5;    --sky-t: #b5d3f8;    --sky-rgb: 156, 196, 245;
+  --pink: #f5a9c8;   --pink-t: #f8bdd5;   --pink-rgb: 245, 169, 200;
 
-  --max: 1040px;
-  --pad: 28px;
+  --font: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --col: 640px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -27,65 +28,51 @@ html { background: var(--bg); }
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background: var(--bg);
-  color: #e9e6df;
+  color: var(--text);
   font-family: var(--font);
+  text-transform: lowercase;   /* the site is all lowercase; .prose opts out */
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--text-4); text-decoration: none; }
-a:hover { color: var(--text); }
-a:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--lav-rgb), 0.55);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+a:hover { text-decoration-color: var(--text); }
+a:focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; border-radius: 3px; }
 
-.accent { color: var(--accent); }
 .mono { font-family: var(--mono); }
-
-.wrap {
-  flex: 1 0 auto;
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 32px var(--pad) 48px;
-}
-
-/* Page intro used on experience / projects / blog */
-.intro { margin-top: clamp(72px, 10vw, 128px); max-width: 720px; }
-.intro h1 {
-  margin: 0;
-  font-size: clamp(48px, 7vw, 84px);
-  line-height: 0.95;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  color: var(--text);
-}
-.intro .lede {
-  margin: 32px 0 0;
-  max-width: 640px;
-  font-size: clamp(21px, 2.6vw, 28px);
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-  color: var(--text);
-}
-.intro .sub {
-  margin: 28px 0 0;
-  font-size: 19px;
-  line-height: 1.55;
-  color: var(--text-3);
-}
 
 .label {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--text-4);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
   text-transform: uppercase;
 }
 
-@media (max-width: 640px) {
-  .hide-sm { display: none !important; }
-}
+/* Highlights: pastel text on a faint tint of the same pastel */
+.hl { padding: 1px 5px; border-radius: 5px; }
+.hl.lav    { color: var(--lav-t);    background: rgba(var(--lav-rgb), 0.13); }
+.hl.mint   { color: var(--mint-t);   background: rgba(var(--mint-rgb), 0.13); }
+.hl.peach  { color: var(--peach-t);  background: rgba(var(--peach-rgb), 0.13); }
+.hl.butter { color: var(--butter-t); background: rgba(var(--butter-rgb), 0.13); }
+.hl.sky    { color: var(--sky-t);    background: rgba(var(--sky-rgb), 0.13); }
+.hl.pink   { color: var(--pink-t);   background: rgba(var(--pink-rgb), 0.13); }
+
+/* Small square "chip" marker */
+.chip { flex: 0 0 12px; width: 12px; height: 12px; border-radius: 3px; }
+
+/* Page intro used on inner pages */
+.intro { margin-top: 96px; }
+.intro h1 { margin: 0; font-size: 34px; line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; }
+.intro p { margin: 16px 0 0; font-size: 19px; line-height: 1.6; color: var(--text-2); }
+
+.list { margin-top: 56px; border-top: 1px solid var(--line); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; }

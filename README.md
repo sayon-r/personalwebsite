@@ -14,10 +14,11 @@ npm run build    # outputs static files to dist/
 
 | To change…                                  | Edit                                   |
 | ------------------------------------------- | -------------------------------------- |
-| Roles, projects, links, listening section   | `src/data/site.ts`                     |
+| Roles, projects, links, listening, colors   | `src/data/site.ts`                     |
 | Blog posts                                  | `src/content/blog/*.md`                |
-| Colors, fonts, spacing (whole site)         | `src/styles/global.css` (`:root`)      |
-| Nav, footer, board edge                     | `src/components/`                      |
+| Palette, fonts, spacing (whole site)        | `src/styles/global.css` (`:root`)      |
+| Header, footer, page counter                | `src/layouts/Base.astro`               |
+| Shift-register strip, listening, figures    | `src/components/`                      |
 | Home / experience / projects / blog layout  | `src/pages/`                           |
 | Résumé PDF, album covers, images            | `public/` (e.g. `public/resume.pdf`)   |
 

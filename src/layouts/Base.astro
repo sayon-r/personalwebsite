@@ -1,23 +1,28 @@
 ---
 import '../styles/global.css';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import BoardEdge from '../components/BoardEdge.astro';
-import { site } from '../data/site';
+import Tape from '../components/Tape.astro';
+import { site, pages, type PageKey } from '../data/site';
 
 interface Props {
+  page?: PageKey;
   title?: string;
   description?: string;
 }
-const { title, description = site.description } = Astro.props;
-const pageTitle = title ? `${title} — ${site.title}` : site.title;
+const { page = 'home', title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : site.name;
+
+// Binary page counter: home = 0001, experience = 0010, ...
+const idx = pages.findIndex((p) => p.key === page) + 1;
+const tint = pages.find((p) => p.key === page)?.color ?? 'lav';
+const counter = [3, 2, 1, 0].map((s) => ((idx >> s) & 1) === 1);
+const year = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0e0e0c" />
+    <meta name="theme-color" content="#11121b" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={pageTitle} />
@@ -26,18 +31,71 @@ const pageTitle = title ? `${title} — ${site.title}` : site.title;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="wrap">
-      <Nav />
+    <Tape />
+    <div class="col">
+      <header>
+        <a class="home" href="/" aria-label="Sayon Ramanan, home">
+          <span class="counter" aria-hidden="true">
+            {counter.map((on) => <span style={on ? `background:var(--${tint})` : undefined}></span>)}
+          </span>
+          sayon ramanan
+        </a>
+        <nav aria-label="Main">
+          {pages.slice(1).map((p) => (
+            <a href={p.href} class:list={{ active: p.key === page }} aria-current={p.key === page ? 'page' : undefined}>
+              {p.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+
       <main>
         <slot />
       </main>
-      <Footer />
+
+      <footer>
+        <span>© {year} · waterloo, on</span>
+        <span>0x53 0x52</span>
+      </footer>
     </div>
-    <BoardEdge />
   </body>
 </html>
+
+<style>
+  .col {
+    position: relative;
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 36px 24px 64px;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px 24px;
+    font-size: 15px;
+  }
+  .home { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; }
+  .counter { display: flex; gap: 3px; }
+  .counter span { width: 6px; height: 6px; border-radius: 1.5px; background: rgba(236, 236, 244, 0.12); }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover { color: var(--text); }
+  nav a.active { color: var(--text); text-decoration: underline; text-decoration-color: var(--text); }
+  footer {
+    margin-top: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
