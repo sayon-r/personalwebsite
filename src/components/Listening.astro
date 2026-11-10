@@ -1,0 +1,60 @@
+---
+import { listening } from '../data/site';
+
+const bars = Array.from({ length: 48 }, (_, i) => ({
+  h: 4 + Math.round(Math.abs(Math.sin(i * 0.55) * Math.cos(i * 0.21)) * 14),
+  on: i < 19,
+}));
+---
+<section class="listening">
+  <div class="label">Listening</div>
+  <div class="row">
+    <div class="now">
+      {listening.cover
+        ? <img class="art" src={listening.cover} alt="" width="64" height="64" />
+        : <div class="art placeholder"></div>}
+      <div class="meta">
+        <div class="track">{listening.track}</div>
+        <div class="artist">{listening.artist}</div>
+        <div class="wave" aria-hidden="true">
+          {bars.map((b) => <span class:list={{ on: b.on }} style={`height:${b.h}px`}></span>)}
+        </div>
+      </div>
+    </div>
+    <ul class="shelf" aria-label="Albums on repeat">
+      {listening.shelf.map((a) => (
+        <li title={a.title}>
+          {a.cover
+            ? <img src={a.cover} alt={a.title} width="44" height="44" />
+            : <span class="tile" style={`background:linear-gradient(140deg,${a.tint[0]},${a.tint[1]})`}></span>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .listening {
+    margin-top: 64px;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .row {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 32px;
+  }
+  .now { display: flex; align-items: center; gap: 16px; flex: 1 1 360px; min-width: 0; }
+  .art { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 4px; object-fit: cover; }
+  .placeholder { background: linear-gradient(140deg, #3d3a55, #14131c); }
+  .meta { flex: 1 1 auto; min-width: 0; }
+  .track { font-size: 15px; color: var(--text); }
+  .artist { margin-top: 2px; font-size: 14px; color: var(--text-4); }
+  .wave { margin-top: 10px; display: flex; align-items: flex-end; gap: 2px; height: 18px; }
+  .wave span { width: 2px; background: rgba(233, 230, 223, 0.22); }
+  .wave span.on { background: var(--accent); }
+  .shelf { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
+  .shelf img, .tile { display: block; width: 44px; height: 44px; border-radius: 3px; object-fit: cover; }
+</style>

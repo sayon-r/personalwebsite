@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import SpecDecode from '../components/figures/SpecDecode.astro';
+import FlashAttn from '../components/figures/FlashAttn.astro';
+import { projects, smallProjects } from '../data/site';
+
+const figures = { specdecode: SpecDecode, flashattn: FlashAttn } as const;
+---
+<Base title="Projects">
+  <section class="intro">
+    <h1>Projects</h1>
+    <p class="sub">Small systems built to understand how fast inference actually works, one layer at a time.</p>
+  </section>
+
+  <section class="cards">
+    {projects.map((p) => {
+      const Figure = figures[p.figure];
+      return (
+        <article>
+          <Figure />
+          <div class="label tag">{p.id} · {p.tag}</div>
+          <h2>{p.name}</h2>
+          <p>{p.summary} {p.todo && <span class="todo">{p.todo}</span>}</p>
+          <div class="foot">
+            <span class="stack">{p.stack}</span>
+            <a href={p.href}>Source ↗</a>
+          </div>
+        </article>
+      );
+    })}
+  </section>
+
+  <section class="small">
+    {smallProjects.map((p) => (
+      <a href={p.href}>
+        <span class="name"><span class="id">{p.id}</span>{p.name}</span>
+        <span class="desc">{p.summary}</span>
+      </a>
+    ))}
+  </section>
+</Base>
+
+<style>
+  .cards {
+    margin-top: 88px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 24px;
+  }
+  article {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  article :global(figure) {
+    margin: 0;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 20px;
+  }
+  article :global(figure svg) { max-width: 100%; height: auto; }
+  article :global(figcaption) {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-4);
+  }
+  .tag { margin-top: 24px; }
+  h2 { margin: 10px 0 0; font-size: 26px; font-weight: 500; letter-spacing: -0.03em; color: var(--text); }
+  p { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-3); }
+  .todo { color: var(--text-2); }
+  .foot {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .stack { font-family: var(--mono); font-size: 11px; color: var(--text-4); }
+  .foot a { font-size: 14px; color: var(--text); }
+
+  .small { margin-top: 24px; }
+  .small a {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .small a:first-child { border-top: 1px solid var(--line); }
+  .name { display: flex; gap: 20px; align-items: baseline; font-size: 18px; color: var(--text); }
+  .id { font-family: var(--mono); font-size: 11px; color: var(--text-4); }
+  .desc { font-size: 15px; color: var(--text-3); }
+</style>

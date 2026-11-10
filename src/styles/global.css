@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------
+   Design tokens. Change the look of the whole site from here.
+   --------------------------------------------------------------- */
+:root {
+  --accent: #ff6a3d;          /* signal orange */
+  --bg: #0e0e0c;              /* warm off-black */
+  --bg-deep: #0b0b0a;
+  --text: #f2efe8;            /* headings, primary text */
+  --text-2: #d6d3cb;          /* links */
+  --text-3: #a8a59d;          /* body copy */
+  --text-4: #8f8c84;          /* labels, dates */
+  --line: rgba(233, 230, 223, 0.12);
+  --line-strong: rgba(233, 230, 223, 0.2);
+  --line-soft: rgba(233, 230, 223, 0.1);
+
+  --font: 'Geist', system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+
+  --max: 1040px;
+  --pad: 28px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: #e9e6df;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--text-4); text-decoration: none; }
+a:hover { color: var(--text); }
+a:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+.accent { color: var(--accent); }
+.mono { font-family: var(--mono); }
+
+.wrap {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 32px var(--pad) 48px;
+}
+
+/* Page intro used on experience / projects / blog */
+.intro { margin-top: clamp(72px, 10vw, 128px); max-width: 720px; }
+.intro h1 {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+.intro .lede {
+  margin: 32px 0 0;
+  max-width: 640px;
+  font-size: clamp(21px, 2.6vw, 28px);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+.intro .sub {
+  margin: 28px 0 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-4);
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .hide-sm { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; }
+}

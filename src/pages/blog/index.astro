@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const minutes = (body = '') => Math.max(1, Math.round(body.split(/\s+/).length / 230));
+const fmt = (d: Date) =>
+  `${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+---
+<Base title="Blog" description="Musings from work and personal research.">
+  <section class="intro">
+    <h1>Blog</h1>
+    <p class="sub">Musings from work and personal research.</p>
+  </section>
+
+  <section class="posts">
+    {posts.length === 0 && <p class="empty">First post coming soon.</p>}
+    {posts.map((post) => (
+      <a href={`/blog/${post.id}`}>
+        <div class="date">{fmt(post.data.date)}</div>
+        <div class="body">
+          <h2>{post.data.title}</h2>
+          <p>{post.data.summary}</p>
+        </div>
+        <div class="read">{minutes(post.body)} min</div>
+      </a>
+    ))}
+  </section>
+</Base>
+
+<style>
+  .posts { margin-top: 88px; border-top: 1px solid var(--line-strong); }
+  a {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .date, .read { font-family: var(--mono); font-size: 12px; color: var(--text-4); padding-top: 8px; }
+  .date { flex: 0 0 120px; }
+  .read { flex: 0 0 auto; }
+  .body { flex: 1 1 420px; min-width: 0; }
+  h2 { margin: 0; font-size: 26px; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
+  a:hover h2 { color: var(--accent); }
+  p { margin: 10px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-3); }
+  .empty { padding: 32px 0; font-size: 16px; color: var(--text-4); }
+</style>

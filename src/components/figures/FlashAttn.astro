@@ -1,0 +1,27 @@
+---
+// 4×8 attention tiles: finished, the current one (in SRAM), and queued.
+const cur = 1 * 8 + 4;
+const tiles = Array.from({ length: 32 }, (_, idx) => ({
+  x: 24 + (idx % 8) * 20,
+  y: 18 + Math.floor(idx / 8) * 20,
+  state: idx < cur ? 'done' : idx === cur ? 'now' : 'queued',
+}));
+---
+<figure>
+  <svg width="300" height="96" viewBox="0 0 300 96" role="img"
+    aria-label="Attention computed tile by tile: finished tiles, the current tile highlighted, and tiles still to come">
+    <text x="0" y="10">K →</text>
+    <text x="0" y="56">Q</text>
+    {tiles.map((t) => <rect x={t.x} y={t.y} width="16" height="16" rx="1.5" class={t.state} />)}
+  </svg>
+  <figcaption>
+    <span>done</span><span class="accent">in sram now</span><span>queued</span>
+  </figcaption>
+</figure>
+
+<style>
+  text { font-family: var(--mono); font-size: 9px; fill: var(--text-4); }
+  .done { fill: rgba(233, 230, 223, 0.2); }
+  .now { fill: var(--accent); }
+  .queued { fill: none; stroke: rgba(233, 230, 223, 0.18); }
+</style>

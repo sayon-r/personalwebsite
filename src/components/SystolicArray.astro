@@ -1,0 +1,38 @@
+---
+// A 12×8 grid of processing elements; light moves through it in a
+// diagonal wave, the way data flows through a systolic array.
+const cols = 12;
+const rows = 8;
+const cells = Array.from({ length: rows * cols }, (_, i) => {
+  const r = Math.floor(i / cols);
+  const c = i % cols;
+  return ((r + c) * 0.14).toFixed(2) + 's';
+});
+---
+<div class="array" aria-hidden="true">
+  {cells.map((d) => <span style={`animation-delay:${d}`}></span>)}
+</div>
+
+<style>
+  .array {
+    display: grid;
+    grid-template-columns: repeat(12, 18px);
+    gap: 6px;
+  }
+  span {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    background: rgba(233, 230, 223, 0.07);
+    animation: pulse 5.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { background: rgba(233, 230, 223, 0.07); }
+    6% { background: var(--accent); }
+    22% { background: rgba(233, 230, 223, 0.07); }
+  }
+  @media (max-width: 420px) {
+    .array { grid-template-columns: repeat(12, 14px); gap: 5px; }
+    span { width: 14px; height: 14px; }
+  }
+</style>

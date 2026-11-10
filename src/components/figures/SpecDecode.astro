@@ -1,0 +1,27 @@
+<figure>
+  <svg width="300" height="44" viewBox="0 0 300 44" role="img"
+    aria-label="Draft tokens checked by the target model: three accepted, one rejected and replaced">
+    <rect x="0" y="12" width="22" height="22" rx="2" class="prompt" />
+    <rect x="26" y="12" width="22" height="22" rx="2" class="prompt" />
+    <rect x="52" y="12" width="22" height="22" rx="2" class="prompt" />
+    <rect x="90" y="12" width="22" height="22" rx="2" class="ok" />
+    <rect x="116" y="12" width="22" height="22" rx="2" class="ok" />
+    <rect x="142" y="12" width="22" height="22" rx="2" class="ok" />
+    <rect x="168.5" y="12.5" width="21" height="21" rx="2" class="rej" />
+    <path d="M170 32L188 14" class="rej" />
+    <rect x="194.5" y="12.5" width="21" height="21" rx="2" class="skip" />
+    <rect x="232" y="12" width="22" height="22" rx="2" class="fix" />
+  </svg>
+  <figcaption>
+    <span>prompt</span><span class="accent">accepted</span><span>rejected</span><span class="fixed">corrected</span>
+  </figcaption>
+</figure>
+
+<style>
+  .prompt { fill: rgba(233, 230, 223, 0.18); }
+  .ok { fill: var(--accent); }
+  .rej { fill: none; stroke: rgba(233, 230, 223, 0.4); }
+  .skip { fill: none; stroke: rgba(233, 230, 223, 0.2); stroke-dasharray: 2 2; }
+  .fix { fill: var(--text); }
+  .fixed { color: var(--text); }
+</style>
