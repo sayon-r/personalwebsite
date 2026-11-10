@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+// The sheet is a 220-dpi render of public/resume.pdf (public/resume.webp).
+// To update: replace resume.pdf and re-render, or ask Claude.
+---
+<Base page="resume" title="Résumé" description="Résumé of Sayon Ramanan.">
+  <section class="intro">
+    <h1>résumé</h1>
+    <div class="meta mono">
+      <span>sheet 1 / 1 · letter</span>
+      <a href="/resume.pdf" download="Sayon_Ramanan_Resume.pdf">download pdf ↓</a>
+    </div>
+  </section>
+
+  <figure class="sheet">
+    <a href="/resume.pdf" aria-label="Open the résumé PDF">
+      <img
+        src="/resume.webp"
+        width="1870"
+        height="2420"
+        alt="Résumé of Sayon Ramanan: education at the University of Waterloo, experience at onsemi, Portable Intelligence and Wat.AI, and projects on speculative decoding and Flash Attention."
+      />
+    </a>
+  </figure>
+</Base>
+
+<style>
+  .meta {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .meta a { font-size: 13px; }
+
+  /* The sheet breaks out of the 640px column so the text is readable */
+  .sheet {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(860px, calc(100vw - 48px));
+    margin: 40px 0 0;
+  }
+  .sheet a { display: block; text-decoration: none; }
+  .sheet img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow:
+      0 0 0 1px rgba(236, 236, 244, 0.08),
+      0 24px 60px -20px rgba(0, 0, 0, 0.6),
+      0 0 80px -30px rgba(var(--lav-rgb), 0.35);
+  }
+</style>

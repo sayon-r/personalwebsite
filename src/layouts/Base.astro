@@ -4,7 +4,7 @@ import Tape from '../components/Tape.astro';
 import { site, pages, type PageKey } from '../data/site';
 
 interface Props {
-  page?: PageKey;
+  page?: PageKey | 'resume';
   title?: string;
   description?: string;
 }

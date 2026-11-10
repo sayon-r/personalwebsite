@@ -26,7 +26,7 @@ export const links = [
   { label: 'github', href: 'https://github.com/sayon-r' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/sayonramanan/' },
   { label: 'email', href: 'mailto:[EMAIL]' },
-  { label: 'résumé', href: '/resume.pdf' }, // drop resume.pdf into /public
+  { label: 'résumé', href: '/resume' },
 ];
 
 // `color` tints the binary page counter beside the name in the header.
