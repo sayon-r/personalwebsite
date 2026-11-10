@@ -72,7 +72,7 @@ export const projects = [
     tag: 'Raspberry Pi 5',
     summary:
       'Two LLMs on a single Raspberry Pi 5, a draft and a target on separate CPU cores, with hand-tuned INT8 matmul kernels written in ARM NEON intrinsics and benchmarked against llama.cpp. Grouped quantization cuts the weights’ memory footprint by 75%.',
-    stack: 'c++ · arm neon · int8 · huggingface',
+    stack: 'c++ · arm neon · quantization',
     href: 'https://github.com/sayon-r/On-Device-Spec-Decoding',
     figure: 'specdecode',
   },
