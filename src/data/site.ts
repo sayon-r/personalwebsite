@@ -30,7 +30,7 @@ export const experience = [
     role: 'Software Engineer Intern',
     team: 'SoC Integration',
     location: 'Waterloo',
-    period: '[mon yyyy] — present',
+    period: 'Sep — Dec 2026',
     summary:
       'Agent-driven firmware SDKs, multi-accelerator model deployment, compiler quantization validation, and automated build and test infrastructure across SoC platforms.',
   },
@@ -38,18 +38,10 @@ export const experience = [
     company: 'Portable Intelligence',
     role: 'Machine Learning Intern',
     team: 'Software Innovation',
-    location: '',
-    period: '[mon yyyy] — [mon yyyy]',
+    location: 'Toronto',
+    period: 'Jan — Apr 2026',
     summary:
       'Reinforcement learning recommendation policies and evaluation tooling for warehouse slot assignment.',
-  },
-  {
-    company: '[Company]',
-    role: '[Role]',
-    team: '',
-    location: '[City]',
-    period: '[mon yyyy] — [mon yyyy]',
-    summary: '[One or two lines on what you built and the result.]',
   },
 ];
 
