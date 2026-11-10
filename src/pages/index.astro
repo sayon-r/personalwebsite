@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Listening from '../components/Listening.astro';
-import { links } from '../data/site';
+import { links, school } from '../data/site';
 
 const index = [
   { href: '/experience', addr: '0x01', name: 'experience', desc: 'onsemi, portable intelligence', color: 'butter' },
@@ -12,6 +12,11 @@ const index = [
 <Base page="home">
   <section class="hero">
     <h1>sayon ramanan<span class="cursor" aria-hidden="true"></span></h1>
+    <div class="school">
+      {school.program} @
+      {school.emblem && <img src={school.emblem} alt="" width="16" height="16" />}
+      <a href={school.href}>{school.name}</a>
+    </div>
     <p>
       passionate about building high performance systems at the intersection of
       <span class="hl lav">hardware and software</span>.
@@ -56,7 +61,19 @@ const index = [
   }
   @keyframes blink { 50% { opacity: 0; } }
   p { margin: 14px 0 0; font-size: 19px; line-height: 1.65; color: var(--text-2); }
-  h1 + p { margin-top: 24px; }
+  .school {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .school img { width: 16px; height: 16px; object-fit: contain; border-radius: 3px; }
+  .school a { color: var(--text-2); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .school + p { margin-top: 24px; }
   .links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 16px; }
 
   .index { margin-top: 80px; }

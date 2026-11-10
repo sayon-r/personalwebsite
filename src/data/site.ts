@@ -12,6 +12,16 @@ export const site = {
     'Building high performance systems at the intersection of hardware and software.',
 };
 
+// Small line under the name on the home page.
+// To show the emblem, put the image in /public (e.g. public/uwaterloo.png)
+// and set `emblem` to its path ('/uwaterloo.png').
+export const school = {
+  program: 'computer engineering',
+  name: 'uwaterloo',
+  href: 'https://uwaterloo.ca',
+  emblem: null as string | null,
+};
+
 export const links = [
   { label: 'github', href: 'https://github.com/sayon-r' },
   { label: 'linkedin', href: '#' }, // [LINKEDIN URL]
