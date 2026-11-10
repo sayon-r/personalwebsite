@@ -25,7 +25,7 @@ export const school = {
 export const links = [
   { label: 'github', href: 'https://github.com/sayon-r' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/sayonramanan/' },
-  { label: 'email', href: 'mailto:[EMAIL]' },
+  { label: 'email', href: 'mailto:sayon.ramanan@uwaterloo.ca' },
   { label: 'résumé', href: '/resume' },
 ];
 
