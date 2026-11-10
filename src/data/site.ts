@@ -73,7 +73,7 @@ export const projects = [
     summary:
       'A small draft model guesses ahead and a larger model checks its work in one pass, so a credit-card computer generates text faster. [Add speedup + models.]',
     stack: 'arm neon · int8 · c++',
-    href: '#',
+    href: 'https://github.com/sayon-r/On-Device-Spec-Decoding',
     figure: 'specdecode',
   },
   {
@@ -82,7 +82,7 @@ export const projects = [
     summary:
       'The forward pass rebuilt tile by tile, with an online softmax so the full attention matrix never exists, wired into a custom autograd function. [Add memory / speed vs naive.]',
     stack: 'pytorch · autograd · tiling',
-    href: '#',
+    href: 'https://github.com/sayon-r/Flash-Attention-Transformer',
     figure: 'flashattn',
   },
 ] as const;
