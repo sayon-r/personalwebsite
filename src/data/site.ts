@@ -71,8 +71,8 @@ export const projects = [
     name: 'On-device speculative decoding',
     tag: 'Raspberry Pi 5',
     summary:
-      'A small draft model guesses ahead and a larger model checks its work in one pass, so a credit-card computer generates text faster. [Add speedup + models.]',
-    stack: 'arm neon · int8 · c++',
+      'Two LLMs on a single Raspberry Pi 5, a draft and a target on separate CPU cores, with hand-tuned INT8 matmul kernels written in ARM NEON intrinsics and benchmarked against llama.cpp. Grouped quantization cuts the weights’ memory footprint by 75%.',
+    stack: 'c++ · arm neon · int8 · huggingface',
     href: 'https://github.com/sayon-r/On-Device-Spec-Decoding',
     figure: 'specdecode',
   },
@@ -80,8 +80,8 @@ export const projects = [
     name: 'Flash Attention, from scratch',
     tag: 'Kernel',
     summary:
-      'The forward pass rebuilt tile by tile, with an online softmax so the full attention matrix never exists, wired into a custom autograd function. [Add memory / speed vs naive.]',
-    stack: 'pytorch · autograd · tiling',
+      'A tiled forward pass that streams KV blocks through an online softmax, so the N×N score matrix is never materialized while still matching standard attention exactly. A custom autograd backward pass recomputes scores in tiles, keeping training memory linear in sequence length.',
+    stack: 'python · pytorch · numpy',
     href: 'https://github.com/sayon-r/Flash-Attention-Transformer',
     figure: 'flashattn',
   },
