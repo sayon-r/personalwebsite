@@ -18,7 +18,7 @@ import { experience } from '../data/site';
         <div class="when">{job.period}</div>
         <div class="what">
           <h2>{job.company}</h2>
-          <div class="role">{job.role} · {job.location}</div>
+          <div class="role">{[job.role, job.team, job.location].filter(Boolean).join(' · ')}</div>
           <p>{job.summary}</p>
         </div>
       </article>

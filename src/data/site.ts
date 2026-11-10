@@ -27,22 +27,26 @@ export const nav = [
 export const experience = [
   {
     company: 'onsemi',
-    role: '[Role]',
+    role: 'Software Engineer Intern',
+    team: 'SoC Integration',
     location: 'Waterloo',
     period: '[mon yyyy] — present',
     summary:
-      '[One or two lines on the work: neural network accelerators and chip infrastructure.]',
+      'Agent-driven firmware SDKs, multi-accelerator model deployment, compiler quantization validation, and automated build and test infrastructure across SoC platforms.',
   },
   {
-    company: '[Company]',
-    role: '[Role]',
-    location: '[City]',
+    company: 'Portable Intelligence',
+    role: 'Machine Learning Intern',
+    team: 'Software Innovation',
+    location: '',
     period: '[mon yyyy] — [mon yyyy]',
-    summary: '[One or two lines on what you built and the result.]',
+    summary:
+      'Reinforcement learning recommendation policies and evaluation tooling for warehouse slot assignment.',
   },
   {
     company: '[Company]',
     role: '[Role]',
+    team: '',
     location: '[City]',
     period: '[mon yyyy] — [mon yyyy]',
     summary: '[One or two lines on what you built and the result.]',

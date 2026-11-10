@@ -99,6 +99,10 @@ const figures = { specdecode: SpecDecode, flashattn: FlashAttn } as const;
     border-bottom: 1px solid var(--line);
   }
   .small a:first-child { border-top: 1px solid var(--line); }
+  .small a:hover .name { color: var(--accent); }
+  article { transition: border-color 0.2s ease; }
+  article:hover { border-color: rgba(233, 230, 223, 0.24); }
+  .foot a:hover { color: var(--accent); }
   .name { display: flex; gap: 20px; align-items: baseline; font-size: 18px; color: var(--text); }
   .id { font-family: var(--mono); font-size: 11px; color: var(--text-4); }
   .desc { font-size: 15px; color: var(--text-3); }
