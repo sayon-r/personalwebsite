@@ -1,0 +1,12 @@
+---
+// The site is lowercased with CSS. Terms listed here keep their real
+// capitalization wherever text is rendered through <KeepCase text={...} />.
+const TERMS = ['SoC'];
+
+interface Props { text: string }
+const { text } = Astro.props;
+
+const re = new RegExp(`\\b(${TERMS.join('|')})\\b`, 'g');
+const parts = text.split(re).map((t) => ({ t, keep: TERMS.includes(t) }));
+---
+{parts.map((p) => (p.keep ? <span class="keep">{p.t}</span> : p.t))}

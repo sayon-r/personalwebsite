@@ -47,6 +47,9 @@ a:focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; border-rad
 
 .mono { font-family: var(--mono); }
 
+/* Opt out of the site-wide lowercase (acronyms like SoC) */
+.keep { text-transform: none; }
+
 .label {
   font-family: var(--mono);
   font-size: 12px;
