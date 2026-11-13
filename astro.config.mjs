@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Set `site` to your final domain once you have one (used for canonical URLs).
+// `site` is the final domain (used for canonical URLs and the sitemap).
 export default defineConfig({
-  site: 'https://sayonr.vercel.app',
+  site: 'https://sayonramanan.com',
 });
