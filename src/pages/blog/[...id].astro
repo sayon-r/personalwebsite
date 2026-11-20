@@ -41,4 +41,9 @@ const date = post.data.date.toLocaleDateString('en-CA', {
   .prose :global(blockquote) { margin: 24px 0 0; padding-left: 16px; border-left: 3px solid var(--lav); color: var(--muted); }
   .prose :global(img) { max-width: 100%; border-radius: 8px; }
   .prose :global(ul), .prose :global(ol) { margin: 20px 0 0; padding-left: 22px; }
+  .prose :global(hr) { margin: 44px 0 0; border: 0; border-top: 1px solid var(--line); }
+  .prose :global(table) { display: block; overflow-x: auto; margin: 24px 0 0; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+  .prose :global(th), .prose :global(td) { padding: 8px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .prose :global(th) { font-weight: 500; color: var(--text); border-bottom-color: rgba(var(--lav-rgb), 0.4); }
+  .prose :global(th:first-child), .prose :global(td:first-child) { padding-left: 0; }
 </style>
